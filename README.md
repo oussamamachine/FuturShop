@@ -1,70 +1,67 @@
-# Getting Started with Create React App
+Futur – Next-Gen Fashion Store
+Futur is a modern e-commerce web app for futuristic fashion, featuring 3D/AR product previews, AI style recommendations, voice shopping, and a customizable jacket designer.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Features
+🛒 Shopping Cart with animated drawer
+👕 3D Jacket Customizer (with real-time color/material updates)
+🧠 AI Style Wizard for personalized recommendations
+🗣️ Voice Shopping Assistant
+🛍️ Product Pages with AR/3D previews
+🎨 Animated Particle Background
+⚡ Fast, responsive, and mobile-friendly
+Tech Stack
+React (with hooks)
+React Router
+Framer Motion (animations)
+@react-three/fiber & drei (3D/AR)
+Tailwind CSS (utility-first styling)
+Three.js (3D engine)
+Context API (state management)
+Getting Started
 
-## Available Scripts
+1. Clone the repository
+   git clone https://github.com/YOUR-USERNAME/futur.git
+   cd futur
+2. Install dependencies
+   npm install
+3. Run the development server
+   npm start
+   Open http://localhost:3000 to view the app.
 
-In the project directory, you can run:
+Project Structure
+src/
+components/
+ai/
+cart/
+effects/
+navigation/
+product/
+sections/
+ui/
+voice/
+context/
+pages/
+App.js
+index.js
+public/
+models/
+images/
+textures/
+Customizing the 3D Jacket
+Place your jacket.glb model in public/models/.
+To enable color/material customization, see the JacketCustomizer.js logic.
+For custom back designs, upload an image in the customizer UI.
+Voice Shopping
+Click the microphone button on the Voice Shopping page.
+Speak your product request (e.g., "Show me summer dresses").
+Deployment
+You can deploy to Vercel, Netlify, or any static hosting that supports React.
 
-### `npm start`
+License
+MIT
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Credits
+3D assets: Sketchfab or your own
+Icons: Feather Icons
+Inspiration: Next-gen fashion tech
+Enjoy exploring the future of fashion!
