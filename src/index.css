@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Holographic effect */
+.holographic-effect {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    45deg,
+    rgba(100, 200, 255, 0.3),
+    rgba(200, 100, 255, 0.3),
+    rgba(255, 100, 200, 0.3)
+  );
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* 3D container */
+.holographic-container {
+  perspective: 1000px;
+  transform-style: preserve-3d;
+}
+
+/* AR button */
+.ar-button {
+  @apply mt-4 px-4 py-2 bg-black text-white rounded-full flex items-center gap-2;
+  backdrop-filter: blur(10px);
+}
+
+/* Voice button */
+.mic-button {
+  @apply px-4 py-2 bg-gray-900 text-white rounded-full;
+  &.active {
+    @apply bg-purple-600;
+  }
+}
