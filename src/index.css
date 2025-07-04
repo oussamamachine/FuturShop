@@ -1,3 +1,31 @@
+/* FuturShop custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  background: #18181b;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #06b6d4 0%, #a21caf 100%);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #a21caf 0%, #06b6d4 100%);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  background: linear-gradient(120deg, #0f172a 0%, #18181b 100%);
+  color: #f1f5f9;
+}
+
+/* Selection highlight */
+::selection {
+  background: #a21caf;
+  color: #fff;
+}
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

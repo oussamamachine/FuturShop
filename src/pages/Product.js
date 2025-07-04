@@ -1,25 +1,29 @@
-import { useParams } from 'react-router-dom'
-import { useState, useEffect } from 'react'
-import { useCart } from '../context/CartContext'
-import { 
-  FiShoppingCart, 
-  FiBox, 
+/**
+ * ProductPage - Product details, 3D/AR, and related products.
+ * @component
+ */
+import { useParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useCart } from '../context/CartContext';
+import {
+  FiShoppingCart,
+  FiBox,
   FiGrid,
   FiSliders,
   FiEye,
-  FiArrowRight
-} from 'react-icons/fi'
-import ProductHologram from '../components/product/ProductHologram'
-import ProductCard from '../components/product/ProductCard'
-import ProductGrid from '../components/product/ProductGrid'
-import ThreeDConfigurator from '../components/product/3DConfigurator'
+  FiArrowRight,
+} from 'react-icons/fi';
+import ProductHologram from '../components/product/ProductHologram';
+import ProductCard from '../components/product/ProductCard';
+import ProductGrid from '../components/product/ProductGrid';
+import ThreeDConfigurator from '../components/product/3DConfigurator';
 
 export default function ProductPage() {
-  const { id } = useParams()
-  const [product, setProduct] = useState(null)
-  const [activeTab, setActiveTab] = useState('details')
-  const [relatedProducts, setRelatedProducts] = useState([])
-  const { addToCart } = useCart()
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+  const [activeTab, setActiveTab] = useState('details');
+  const [relatedProducts, setRelatedProducts] = useState([]);
+  const { addItemToCart } = useCart();
 
   useEffect(() => {
     const mockProduct = {
@@ -31,35 +35,30 @@ export default function ProductPage() {
       colors: ['#3B82F6', '#10B981', '#F59E0B'],
       configurations: {
         material: ['Carbon Fiber', 'Titanium', 'Ceramic'],
-        finish: ['Matte', 'Glossy', 'Textured']
-      }
-    }
+        finish: ['Matte', 'Glossy', 'Textured'],
+      },
+    };
     const mockRelated = [
       { id: 1, name: 'FutureTech X', price: 249.99, image: '/products/x.jpg' },
       { id: 2, name: 'FutureTech Lite', price: 149.99, image: '/products/lite.jpg' },
-      { id: 3, name: 'FutureTech Pro', price: 299.99, image: '/products/pro.jpg' }
-    ]
+      { id: 3, name: 'FutureTech Pro', price: 299.99, image: '/products/pro.jpg' },
+    ];
+    setProduct(mockProduct);
+    setRelatedProducts(mockRelated);
+  }, [id]);
 
-    setProduct(mockProduct)
-    setRelatedProducts(mockRelated)
-  }, [id])
-
-  if (!product) return <LoadingSkeleton />
+  if (!product) return <LoadingSkeleton />;
 
   return (
     <div className="container mx-auto px-4 py-8">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
         <div className="space-y-6">
           <ProductHologram product={product} />
-          
           <div className="bg-gray-50 p-6 rounded-xl">
             <h3 className="flex items-center gap-2 text-lg font-semibold mb-4">
               <FiSliders /> 3D Configurator
             </h3>
-            <ThreeDConfigurator 
-              options={product.configurations}
-              basePrice={product.price}
-            />
+            <ThreeDConfigurator options={product.configurations} basePrice={product.price} />
           </div>
         </div>
         <div>
@@ -75,22 +74,21 @@ export default function ProductPage() {
               </div>
             ))}
           </div>
-
           <button
-            onClick={() => addToCart(product)} 
+            onClick={() => addItemToCart(product)}
             className="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium flex items-center justify-center gap-2 mb-8"
           >
             <FiShoppingCart /> Add to Cart
           </button>
           <div className="border-b border-gray-200">
             <nav className="flex space-x-8">
-              <TabButton 
+              <TabButton
                 active={activeTab === 'details'}
                 onClick={() => setActiveTab('details')}
                 icon={<FiBox />}
                 label="Details"
               />
-              <TabButton 
+              <TabButton
                 active={activeTab === 'specs'}
                 onClick={() => setActiveTab('specs')}
                 icon={<FiSliders />}
@@ -98,7 +96,6 @@ export default function ProductPage() {
               />
             </nav>
           </div>
-
           <div className="py-4">
             {activeTab === 'details' && (
               <div>
@@ -130,16 +127,16 @@ export default function ProductPage() {
         </h2>
         <ProductGrid>
           {relatedProducts.map(product => (
-            <ProductCard 
+            <ProductCard
               key={product.id}
               product={product}
-              onAddToCart={() => addToCart(product)}
+              onAddToCart={() => addItemToCart(product)}
             />
           ))}
         </ProductGrid>
       </section>
     </div>
-  )
+  );
 }
 function LoadingSkeleton() {
   return (

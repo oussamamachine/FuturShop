@@ -1,29 +1,40 @@
-import { useState, useEffect } from 'react';
+
+/**
+ * VoiceShopping - Accessible, animated voice shopping assistant.
+ * Uses browser speech recognition to match product categories.
+ * @component
+ */
+import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
+
 const PRODUCT_RESPONSES = {
   'neon jackets': {
     title: 'Neon Jackets Collection',
     description: 'Check out our vibrant neon jackets perfect for nightlife and festivals!',
-    image: '/images/neon-jackets.jpg'
+    image: '/images/neon-jackets.jpg',
+    link: '/collections/neon-jackets',
   },
   'summer dresses': {
     title: 'Summer Dresses',
     description: 'Light and breezy dresses for your summer adventures',
-    image: '/images/summer-dresses.jpg'
+    image: '/images/summer-dresses.jpg',
+    link: '/collections/summer-dresses',
   },
   'red sneakers': {
     title: 'Red Sneakers',
     description: 'Bold red sneakers to make a statement',
-    image: '/images/red-sneakers.jpg'
-  }
+    image: '/images/red-sneakers.jpg',
+    link: '/collections/red-sneakers',
+  },
 };
+
 
 export default function VoiceShopping() {
   const [isListening, setIsListening] = useState(false);
   const [command, setCommand] = useState('');
   const [response, setResponse] = useState(null);
   const [error, setError] = useState(null);
-  const [recognition, setRecognition] = useState(null);
+  const recognitionRef = useRef(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -33,23 +44,30 @@ export default function VoiceShopping() {
         recognition.continuous = false;
         recognition.lang = 'en-US';
         recognition.interimResults = false;
-        
+
         recognition.onresult = (event) => {
           const transcript = event.results[0][0].transcript.toLowerCase();
           setCommand(transcript);
           processCommand(transcript);
         };
-        
+
         recognition.onerror = (event) => {
           setError('Error occurred in recognition: ' + event.error);
           setIsListening(false);
         };
-        
-        setRecognition(recognition);
+
+        recognitionRef.current = recognition;
       } else {
         setError('Speech recognition not supported in this browser');
       }
     }
+    // Clean up on unmount
+    return () => {
+      if (recognitionRef.current) {
+        recognitionRef.current.onresult = null;
+        recognitionRef.current.onerror = null;
+      }
+    };
   }, []);
 
   const processCommand = (command) => {
@@ -69,15 +87,13 @@ export default function VoiceShopping() {
 
   const handleVoiceCommand = () => {
     if (isListening) return;
-    
     setError(null);
     setCommand('');
     setResponse(null);
     setIsListening(true);
-    
     try {
-      if (recognition) {
-        recognition.start();
+      if (recognitionRef.current) {
+        recognitionRef.current.start();
       } else {
         setTimeout(() => {
           setCommand('Show me neon jackets');
@@ -177,9 +193,17 @@ export default function VoiceShopping() {
                     />
                   </div>
                 )}
-                <button className="mt-4 px-6 py-2 bg-primary rounded-lg font-medium hover:bg-primary/90 transition-colors">
-                  View Collection
-                </button>
+                {response.link && (
+                  <a
+                    href={response.link}
+                    className="mt-4 inline-block px-6 py-2 bg-primary rounded-lg font-medium hover:bg-primary/90 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-400"
+                    tabIndex={0}
+                    aria-label={`View ${response.title} collection`}
+                    data-testid="voice-view-collection"
+                  >
+                    View Collection
+                  </a>
+                )}
               </motion.div>
             )}
 

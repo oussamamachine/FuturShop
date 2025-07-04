@@ -1,3 +1,8 @@
+
+/**
+ * Checkout - Accessible, animated checkout page with order summary and form.
+ * @component
+ */
 import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import { motion } from 'framer-motion';
@@ -18,14 +23,18 @@ export default function Checkout() {
     cardCvc: '',
   });
 
+  // Handle input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
+  // Handle form submit
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('Order submitted:', { formData, cartItems });
+    if (process.env.NODE_ENV === 'development') {
+      // Order submitted: { formData, cartItems }
+    }
     clearCart();
     setCheckoutComplete(true);
   };
